@@ -56,6 +56,23 @@ public class myController
             return "Gagal tambah barang, Id sudah ada.";
         }
     }
+    
+    @RequestMapping("/edit/{id}")
+    public String editData(@PathVariable("id") int id, @RequestBody Barang barang)
+    {
+        try
+        {
+            data = jpactrl.findBarang(id);
+            jpactrl.edit(barang);
+            return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ data.getNama() + "\nJumlah: " +data.getJumlah();
+            
+        }
+        catch (Exception e)
+        {
+            return "data sudah ada.";
+        }
+    }
+    
     @RequestMapping("/delete/{id}")
     public String deleteData(@PathVariable("id") int id)
     {
