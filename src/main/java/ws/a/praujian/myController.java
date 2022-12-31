@@ -63,13 +63,50 @@ public class myController
         try
         {
             data = jpactrl.findBarang(id);
-            jpactrl.edit(barang);
-            return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ data.getNama() + "\nJumlah: " +data.getJumlah();
+            barang.setId(id);
             
+            if(data.getId() != id)
+            {
+                return "data tidak ada.";
+            }
+            else
+                if(barang.getNama() == null)
+            {
+                data = jpactrl.findBarang(id);
+                barang.setNama(data.getNama());
+                jpactrl.edit(barang);
+                Barang newdata = new Barang();
+                newdata = jpactrl.findBarang(id);
+                return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ newdata.getNama() + "\nJumlah: " + newdata.getJumlah();
+            }
+            else if(barang.getJumlah() == null)
+            {
+                data = jpactrl.findBarang(id);
+                barang.setJumlah(data.getJumlah());
+                jpactrl.edit(barang);
+                Barang newdata = new Barang();
+                newdata = jpactrl.findBarang(id);
+                return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ newdata.getNama() + "\nJumlah: " + newdata.getJumlah();
+            }
+            else if(barang.getNama() != null && barang.getJumlah() !=null)
+            {
+                jpactrl.edit(barang);
+                Barang newdata = new Barang();
+                newdata = jpactrl.findBarang(id);
+                return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ newdata.getNama() + "\nJumlah: " + newdata.getJumlah();
+            }
+            else
+            {
+                return "error";
+            }
+            
+//            data = jpactrl.findBarang(id);
+//            jpactrl.edit(barang);
+//            return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ data.getNama() + "\nJumlah: " +data.getJumlah();
         }
         catch (Exception e)
         {
-            return "data sudah ada.";
+            return "data tidak ada.";
         }
     }
     
