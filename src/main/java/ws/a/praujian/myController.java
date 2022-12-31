@@ -4,15 +4,12 @@
  */
 package ws.a.praujian;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 import ws.a.praujian.exceptions.NonexistentEntityException;
 
 /**
@@ -46,6 +43,19 @@ public class myController
         return jpactrl.findBarangEntities();
     }
     
+    @RequestMapping("/addBarang")
+    public String addData(@RequestBody Barang barang)
+    {
+        try
+        {
+            jpactrl.create(barang);
+            return "Barang telah ditambahkan.";
+        }
+        catch (Exception message)
+        {
+            return "Gagal tambah barang, Id sudah ada.";
+        }
+    }
     @RequestMapping("/delete/{id}")
     public String deleteData(@PathVariable("id") int id)
     {
@@ -59,6 +69,4 @@ public class myController
             return id + " Data tidak ditemukan.";
         }
     }
-    
-    
 }
