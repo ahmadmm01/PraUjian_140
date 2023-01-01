@@ -69,8 +69,7 @@ public class myController
             {
                 return "data tidak ada.";
             }
-            else
-                if(barang.getNama() == null)
+            else if(barang.getNama() == null)
             {
                 data = jpactrl.findBarang(id);
                 barang.setNama(data.getNama());
@@ -99,10 +98,6 @@ public class myController
             {
                 return "error";
             }
-            
-//            data = jpactrl.findBarang(id);
-//            jpactrl.edit(barang);
-//            return  "Edited: \n\nId: " + data.getId() + "\nNama: "+ data.getNama() + "\nJumlah: " +data.getJumlah();
         }
         catch (Exception e)
         {
